@@ -1195,6 +1195,16 @@
     <url-pattern>/api/sparqlUpdate</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>DistributeDataApi</servlet-name>
+    <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.api.DistributeDataApiController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DistributeDataApi</servlet-name>
+    <url-pattern>/api/dataRequest/*</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>StandardVisualizationController</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.visualization.StandardVisualizationController</servlet-class>
