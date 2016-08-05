@@ -2,6 +2,8 @@
 
 package edu.cornell.mannlib.vivo.orcid;
 
+import static edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.SparqlQueryRunner.createSelectQueryContext;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,15 +20,14 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.IdentifierBundle;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.RequestIdentifiers;
-import edu.cornell.mannlib.vitro.webapp.auth.identifier.common.HasAssociatedIndividual;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.common.HasProfile;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.common.HasProxyEditingRights;
 import edu.cornell.mannlib.vitro.webapp.auth.identifier.common.IsRootUser;
 import edu.cornell.mannlib.vitro.webapp.controller.VitroRequest;
 import edu.cornell.mannlib.vitro.webapp.controller.freemarker.UrlBuilder;
-import edu.cornell.mannlib.vitro.webapp.utils.SparqlQueryRunner;
-import edu.cornell.mannlib.vitro.webapp.utils.SparqlQueryRunner.QueryParser;
 import edu.cornell.mannlib.vitro.webapp.utils.dataGetter.DataGetter;
+import edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.ResultSetParser;
+import edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.SparqlQueryRunner.SelectQueryContext;
 import edu.cornell.mannlib.vivo.orcid.controller.OrcidIntegrationController;
 
 /**
@@ -122,8 +123,8 @@ public class OrcidIdDataGetter implements DataGetter {
 	private List<OrcidInfo> runSparqlQuery(String individualUri) {
 		String queryStr = String.format(QUERY_TEMPLATE, individualUri,
 				ORCID_ID, ORCID_IS_CONFIRMED);
-		SparqlQueryRunner runner = new SparqlQueryRunner(vreq.getJenaOntModel());
-		return runner.executeSelect(new OrcidResultParser(), queryStr);
+		SelectQueryContext runner = createSelectQueryContext(vreq.getJenaOntModel(), queryStr);
+		return runner.execute().parse(new OrcidResultParser());
 	}
 
 	private Map<String, Object> buildMap(boolean isAuthorizedToConfirm,
@@ -154,7 +155,7 @@ public class OrcidIdDataGetter implements DataGetter {
 	/**
 	 * Parse the results of the SPARQL query.
 	 */
-	private static class OrcidResultParser extends QueryParser<List<OrcidInfo>> {
+	private static class OrcidResultParser extends ResultSetParser<List<OrcidInfo>> {
 		@Override
 		protected List<OrcidInfo> defaultValue() {
 			return Collections.emptyList();
