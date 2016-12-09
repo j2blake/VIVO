@@ -24,7 +24,7 @@
 <#--add the VIVO-ORCID interface -->
 <#include "individual-orcidInterface.ftl">  
         
-<section itemscope itemtype="http://schema.org/Person" id="individual-intro" class="vcard person" role="region">
+<section id="individual-intro" class="vcard person" role="region">
 
     <section id="share-contact" role="region"> 
         <!-- Image -->           
@@ -70,7 +70,7 @@
                 <h2>${relatedSubject.relatingPredicateDomainPublic} ${i18n().indiv_foafperson_for} ${relatedSubject.name}</h2>
                 <p><a href="${relatedSubject.url}" title="${i18n().indiv_foafperson_return}">&larr; ${i18n().indiv_foafperson_return} ${relatedSubject.name}</a></p>
             <#else>                
-                <h1 class="vcard foaf-person">
+                <h1 class="foaf-person">
                     <#-- Label -->
                     <span itemprop="name" class="fn"><@p.label individual editable labelCount localesCount/></span>
 
@@ -110,7 +110,7 @@
 		<#include "individual-openSocial.ftl">
     </section>
     
-</section>
+</span></section>
 
 <#assign nameForOtherGroup = "${i18n().other}"> 
 
@@ -174,4 +174,6 @@ ${scripts.add('<script type="text/javascript" src="${urls.base}/js/individual/in
               '<script type="text/javascript" src="${urls.base}/js/individual/individualUriRdf.js"></script>',
 			  '<script type="text/javascript" src="${urls.base}/js/individual/moreLessController.js"></script>',
               '<script type="text/javascript" src="${urls.base}/js/jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>',
-              '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>')}
+              '<script type="text/javascript" src="${urls.base}/js/imageUpload/imageUploadUtils.js"></script>',
+              '<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>')}
+
