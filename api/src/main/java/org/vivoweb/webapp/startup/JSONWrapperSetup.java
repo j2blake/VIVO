@@ -14,8 +14,8 @@ import edu.cornell.mannlib.vitro.webapp.dao.jena.QueryUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
-import org.json.JSONObject;
+import bogus.bogus.JSONException;
+import bogus.bogus.JSONObject;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

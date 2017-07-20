@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
+import bogus.bogus.JSONException;
 
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
