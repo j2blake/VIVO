@@ -1,0 +1,37 @@
+@prefix : <http://vitro.mannlib.cornell.edu/ns/vitro/ApplicationSetup#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+#
+# Data distributors 
+# 
+:search_by_URI
+    a   <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> ,
+        <java:edu.cornell.library.scholars.webapp.controller.api.distribute.search.SearchByUriDataDistributor> ;
+    :actionName "searchByUri" .
+    
+:drill_by_URI
+    a   <java:edu.cornell.library.scholars.webapp.controller.api.distribute.DataDistributor> ,
+        <java:edu.cornell.library.scholars.webapp.controller.api.distribute.search.DrillDownSearchByUriDataDistributor> ;
+    :actionName "searchAndDrill" .
+
+#    
+# Search index customization
+#
+:documentModifier_publications
+    a   <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.SelectQueryDocumentModifier> ,
+        <java:edu.cornell.mannlib.vitro.webapp.searchindex.documentBuilding.DocumentModifier> ;
+    rdfs:label "URIs of publications are added to publicationURI field." ;
+    :hasTargetField "publicationURI" ;
+    :hasSelectQuery """
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+        PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX bibo: <http://purl.org/ontology/bibo/>
+        SELECT ?publication 
+		WHERE {
+			?uri vivo:relatedBy ?authorship .
+			?authorship a vivo:Authorship .
+			?authorship vivo:relates ?publication .
+			?publication a bibo:Document .
+	    }
+	    """ .
+    

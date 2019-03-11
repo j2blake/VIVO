@@ -667,6 +667,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>DataDistributor</servlet-name>
+    <servlet-class>edu.cornell.library.scholars.webapp.controller.api.DistributeDataApiController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DataDistributor</servlet-name>
+    <url-pattern>/api/dataRequest/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>HomePageAjax</servlet-name>
     <servlet-class>edu.cornell.mannlib.vitro.webapp.controller.ajax.HomePageAjaxController</servlet-class>
   </servlet>
